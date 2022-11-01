@@ -5,6 +5,7 @@ import com.example.postgresdemo.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,13 +18,20 @@ public class StudentController {
     private StudentService service;
 
     @GetMapping
+//    @PreAuthorize("hasAuthority('ACCESS_STUDENT')")
     public ResponseEntity<List<Student>> getAllStudents() {
         return ResponseEntity.ok(service.getAllStudents());
     }
 
     @PostMapping
+//    @PreAuthorize("hasAuthority('CREATE_STUDENT')")
     public ResponseEntity<Student> create(@RequestBody Student student){
         return ResponseEntity.status(201).body(service.create(student));
+    }
+
+    @GetMapping("/city")
+    public ResponseEntity<List<Student>> getByCityName(@RequestParam("city") String city) {
+        return ResponseEntity.ok(service.getByCity(city));
     }
 
     @GetMapping("/{id}")

@@ -37,6 +37,7 @@ public class StudentService {
             record.setAge(student.getAge());
             record.setStandard(student.getStandard());
             record.setEmail(student.getEmail());
+            record.setPassword(student.getPassword());
             return studentRepository.save(record);
         }
         return null;
@@ -46,5 +47,7 @@ public class StudentService {
         studentRepository.deleteById(id);
     }
 
-
+    public List<Student> getByCity(String city) {
+        return studentRepository.findByAddressCityEqualsIgnoreCase(city);
+    }
 }
