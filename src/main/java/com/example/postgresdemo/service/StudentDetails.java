@@ -5,19 +5,18 @@ import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
 
 import java.util.Collection;
 import java.util.List;
 
 public class StudentDetails implements UserDetails {
 
+    @Getter
+    private Student student;
+
     public StudentDetails(Student student) {
         this.student = student;
     }
-
-    @Getter
-    private Student student;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
